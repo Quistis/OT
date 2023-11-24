@@ -1,0 +1,58 @@
+[
+  {
+    "fio": "Пупа",
+    "position_id": 1,
+    "subdivision_id": 1,
+    "id": 1,
+    "position": "Инженер",
+    "subdivision": "отдел математической обработки и т.п.",
+    "division": "ИВЦ",
+    "certificate": 1,
+    "exams": [
+      {
+        "id": 1,
+        "exam_name": "ОТ",
+        "exam_type_id": 1,
+        "date": "2023-11-07",
+        "next_date": "2024-06-05"
+      },
+      {
+        "id": 2,
+        "exam_name": "ПБ",
+        "exam_type_id": 2,
+        "date": "2023-11-24",
+        "next_date": "2025-06-03"
+      }
+    ]
+  },
+  {
+    "fio": "Лупа",
+    "position_id": 2,
+    "subdivision_id": 2,
+    "id": 2,
+    "position": "Начальник",
+    "subdivision": "траекторщеки",
+    "division": "ИВЦ",
+    "certificate": 2,
+    "exams": []
+  },
+  {
+    "fio": "Кабанчик",
+    "position_id": 3,
+    "subdivision_id": 3,
+    "id": 3,
+    "position": "Специалист",
+    "subdivision": "отдел негры",
+    "division": "ИП-5",
+    "certificate": 3,
+    "exams": [
+      {
+        "id": 3,
+        "exam_name": "ПБ",
+        "exam_type_id": 2,
+        "date": "2023-12-13",
+        "next_date": "2024-10-09"
+      }
+    ]
+  }
+]

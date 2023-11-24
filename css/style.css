@@ -1,0 +1,79 @@
+.container, .container-fluid {
+    width: 65%;
+}
+
+.navbar {
+  background-color: #e3f2fd;
+}
+
+.dropdown {
+  overflow: visible;
+  z-index: 999;
+}
+
+.margin {
+    margin: 5px;
+}
+
+.modal-size-2 {
+    width:200px
+}
+
+.navbar-brand img{
+    border: 2px solid lightgreen;
+}
+
+.navbar-brand img:hover {
+    border: 2px solid greenyellow;
+    opacity: 0.7;
+}
+
+.nav-item:hover {
+    opacity: 0.7;
+    background-color: rgba(13, 110, 253, 0.5);
+    border-radius: 5px;
+}
+
+.employee-list {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+.employee-card {
+    width: 100%;
+}
+
+.employee-info {
+    width: 30%;
+    padding-top: 10px;
+}
+
+.card-body {
+    margin: 0;
+}
+
+.card-text {
+    text-align: justfy-all;
+}
+
+.employee-examaminations {
+    width: 60%;
+    align-self: center;
+    margin: 0;
+}
+
+.arrow-down {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding: 5px;
+    margin: -7px auto 0 10px;
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
