@@ -1,5 +1,8 @@
-//import { renderEmployees } from './renderEmployeeList.js';
-import { getNavPillsData } from './api.js';
+//import { renderEmployees } from 'static/js/renderEmployeeList.js';
+// import { getNavPillsData } from 'static/js/api.js';
+
+import { renderEmployees } from './renderEmployeeList.js';
+import { getEmployeesData, getNavPillsData } from './api.js';
 
 //const ACTIVE_CLASS = 'active';
 
