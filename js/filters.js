@@ -1,5 +1,5 @@
-//import { renderEmployees } from './renderEmployeeList.js';
-import { getNavPillsData } from './api.js';
+import { renderEmployees } from './renderEmployeeList.js';
+import { getEmployeesData, getNavPillsData } from './api.js';
 
 //const ACTIVE_CLASS = 'active';
 
@@ -8,6 +8,7 @@ const filtersList = document.querySelector('.nav-pills');
 const createFilterItem = (filterPill) => {
   const filterItem = document.createElement('li');
   filterItem.classList.add('nav-item');
+  filterItem.classList.add('filter-item');
 
   const filterBtn = document.createElement('button');
   filterBtn.classList.add('nav-link');
@@ -31,8 +32,40 @@ const renderFilterPills = (filters) => {
 
 getNavPillsData(renderFilterPills);
 
+const isButton = (evt) => evt.target.tagName === 'BUTTON';
+
+const onDataSuccess = (data) => {
+  const employeeList = document.querySelector('.employee-list');
+  employeeList.innerHTML = '';
+
+  renderEmployees(data);
+};
+
+const sendRequest = (onSuccess, url) => {
+  fetch(url)
+    .then((responce) => responce.json())
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const onFiltersListClick = (evt) => {
-  evt.preventDefault();
+  if (isButton(evt)) {
+    const targetId = evt.target.id.replace('filter-', '');
+
+    if (targetId === 'everyone') {
+      getEmployeesData(onDataSuccess);
+
+      return;
+    }
+
+    const url = `http://192.168.163.199/employees/get_all_with_exams?division=${targetId}`;
+
+    sendRequest(onDataSuccess, url);
+  }
 };
 
 filtersList.addEventListener('click', onFiltersListClick);

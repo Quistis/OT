@@ -3,7 +3,7 @@ const Urls = {
   navPillsData: './navPillsData.json',
 };
 
-const sendRequest = (onSuccess, onFail, route, method, body = null) => {
+const sendRequest = (onSuccess, route, method, body = null) => {
   fetch(
     Urls[route],
     {
@@ -16,11 +16,11 @@ const sendRequest = (onSuccess, onFail, route, method, body = null) => {
       onSuccess(data);
     })
     .catch((err) => {
-      onFail(err);
+      console.log(err);
     });
 };
 
-const getEmployeesData = (onSuccess, onFail, route = 'employeeData', method = 'GET') => sendRequest(onSuccess, onFail, route, method);
-const getNavPillsData = (onSuccess, onFail, route = 'navPillsData', method = 'GET') => sendRequest(onSuccess, onFail, route, method);
+const getEmployeesData = (onSuccess,/* onFail,*/ route = 'employeeData', method = 'GET') => sendRequest(onSuccess,/* onFail,*/ route, method);
+const getNavPillsData = (onSuccess,/* onFail,*/ route = 'navPillsData', method = 'GET') => sendRequest(onSuccess,/* onFail,*/ route, method);
 
 export {getEmployeesData, getNavPillsData};
