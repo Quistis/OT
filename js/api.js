@@ -1,6 +1,6 @@
 const Urls = {
-  employeeData: './response.json',
-  navPillsData: './navPillsData.json',
+  employeeData: '/employees/get_all_with_exams/',
+  navPillsData: '/divisions/',
 };
 
 const sendRequest = (onSuccess, onFail, route, method, body = null) => {

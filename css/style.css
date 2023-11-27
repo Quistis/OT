@@ -115,7 +115,7 @@ th, td {
 }
 
 .exam-date {
-  width: clamp(100px, 110px, 120px);
+  width: clamp(120px, 140px, 160px);
 }
 
 .exam-next-date {
