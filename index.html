@@ -53,31 +53,11 @@
 
 
 <!--Навигация по подразделениям-->
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
       <ul class="nav nav-pills mb-3 gap-1">
 
         <li class="nav-item">
-          <a class="nav-link active" id="everyone" aria-current="page" href="#">Все</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" id="ivc" href="#">ИВЦ</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" id="ip-1" href="#">ИП-1</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" id="ip-2" href="#">ИП-2</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" id="ip-3" href="#">ИП-3</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" id="ip-5" href="#">ИП-5</a>
+          <button class="nav-link active" id="everyone" aria-current="page">Все</button>
         </li>
 
       </ul>
@@ -187,11 +167,11 @@
 
           <a class="arrow-down" data-bs-toggle="collapse" href="#24" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 
-          <a class="me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+          <a class="add-exam__btn me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
             <img src="./img/icon-plus.svg" width="28px" height="28px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить экзамен">
           </a>
 
-          <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+          <a class="edit-employee-info__btn" href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
             <img src="./img/icon-edit.png" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать сотрудника">
           </a>
 
@@ -199,7 +179,7 @@
 
         <div class="collapse" id="24">
 
-          <div class="card-body row d-flex justify-content-between align-items-start flex-wrap">
+          <div class="card-body row d-flex justify-content-start align-items-start flex-wrap">
 
             <div class="employee-info col-1 d-flex flex-column justify-content-center">
 
@@ -256,10 +236,13 @@
         <table class="employee-examaminations__table examinations-table table table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Экзамен</th>
-              <th scope="col">Дата сдачи</th>
-              <th scope="col">Дата следующей сдачи</th>
+              <th class="exam-number" scope="col">#</th>
+              <th class="exam-name" scope="col">Экзамен</th>
+              <th class="exam-protocol" scope="col">Протокол</th>
+              <th class="exam-date" scope="col">Дата сдачи</th>
+              <th class="exam-next-date" scope="col">Следующая сдача</th>
+              <th class="exam-place" scope="col">Место сдачи</th>
+              <th class="exam-notation" scope="col">Примечание</th>
             </tr>
           </thead>
           <tbody>

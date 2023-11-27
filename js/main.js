@@ -1,5 +1,6 @@
 import { getEmployeesData } from './api.js';
 import { renderEmployees } from './renderEmployeeList.js';
+import './filters.js';
 
 let employees = [];
 

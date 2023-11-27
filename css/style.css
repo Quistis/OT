@@ -1,7 +1,23 @@
 .container, .container-fluid {
-    width: 65%;
+    width: 80%;
 }
 
+table {
+  border-spacing: 0px;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+thead {
+  border-bottom: 1px solid black;
+}
+
+th, td {
+  vertical-align: middle;
+}
+
+/*Стили для навигации*/
 .navbar {
   background-color: #e3f2fd;
 }
@@ -33,7 +49,7 @@
     background-color: rgba(13, 110, 253, 0.5);
     border-radius: 5px;
 }
-
+/*Стили для карточек сотрудников и вложенных данных*/
 .employee-list {
     width: 100%;
 
@@ -50,6 +66,28 @@
     padding-top: 10px;
 }
 
+.arrow-down {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  margin: -7px auto 0 10px;
+
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.arrow-down:hover {
+  opacity: 0.3;
+}
+
+.add-exam__btn:hover, .edit-employee-info__btn:hover {
+  opacity: 0.3;
+}
+
 .card-body {
     margin: 0;
 }
@@ -59,21 +97,32 @@
 }
 
 .employee-examaminations {
-    width: 60%;
+    width: 70%;
     align-self: center;
     margin: 0;
 }
 
-.arrow-down {
-    border: solid black;
-    border-width: 0 2px 2px 0;
-
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    padding: 5px;
-    margin: -7px auto 0 10px;
-
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+.exam-number {
+  width: clamp(30px, 40px, 50px);
 }
+
+.exam-name {
+  width: clamp(90px, 95px, 120px);
+}
+
+.exam-protocol {
+  width: clamp(100px, 150px, 170px);
+}
+
+.exam-date {
+  width: clamp(100px, 110px, 120px);
+}
+
+.exam-next-date {
+  width: clamp(120px, 160px, 170px);
+}
+
+.exam-place {
+  width: clamp(80px, 115px, 130px);
+}
+

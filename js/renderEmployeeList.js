@@ -19,18 +19,33 @@ const createExamination = (exam, index) => {
 
   const examName = document.createElement('td');
   examName.classList.add('exam-name');
-  examName.textContent = exam?.exam_name;
+  examName.textContent = exam.exam_name;
   examElement.append(examName);
+
+  const examProtocol = document.createElement('td');
+  examProtocol.classList.add('exam-ptotocol');
+  examProtocol.textContent = exam.protocol;
+  examElement.append(examProtocol);
 
   const examDate = document.createElement('td');
   examDate.classList.add('exam-date');
-  examDate.textContent = exam?.date;
+  examDate.textContent = exam.date;
   examElement.append(examDate);
 
   const examNextDate = document.createElement('td');
   examNextDate.classList.add('exam-next-date');
-  examNextDate.textContent = exam?.next_date;
+  examNextDate.textContent = exam.next_date;
   examElement.append(examNextDate);
+
+  const examPlace = document.createElement('td');
+  examPlace.classList.add('exam-place');
+  examPlace.textContent = exam.place;
+  examElement.append(examPlace);
+
+  const examNotation = document.createElement('td');
+  examNotation.classList.add('exam-notation');
+  examNotation.textContent = exam.notation;
+  examElement.append(examNotation);
 
   return examElement;
 };

@@ -1,11 +1,11 @@
 const Urls = {
-  GET: 'https://30.javascript.pages.academy/kekstagram/data',
-  POST: 'https://30.javascript.pages.academy/kekstagram/',
+  employeeData: './response.json',
+  navPillsData: './navPillsData.json',
 };
 
-const sendRequest = (onSuccess, onFail, method, body) => {
+const sendRequest = (onSuccess, onFail, route, method, body = null) => {
   fetch(
-    Urls[method],
+    Urls[route],
     {
       method: method,
       body: body,
@@ -20,13 +20,7 @@ const sendRequest = (onSuccess, onFail, method, body) => {
     });
 };
 
-const getEmployeesData = (onSuccess) => {
-  fetch ('./response.json')
-    .then((response) => response.json())
-    .then((data) => onSuccess(data));
-};
+const getEmployeesData = (onSuccess, onFail, route = 'employeeData', method = 'GET') => sendRequest(onSuccess, onFail, route, method);
+const getNavPillsData = (onSuccess, onFail, route = 'navPillsData', method = 'GET') => sendRequest(onSuccess, onFail, route, method);
 
-const loadData = (onSuccess, onFail, method = 'GET') => sendRequest(onSuccess, onFail, method);
-const uploadData = (onSuccess, onFail, method = 'POST', body) => sendRequest(onSuccess, onFail, method, body);
-
-export {loadData, uploadData, getEmployeesData};
+export {getEmployeesData, getNavPillsData};

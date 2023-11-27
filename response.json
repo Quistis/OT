@@ -14,14 +14,20 @@
         "exam_name": "ОТ",
         "exam_type_id": 1,
         "date": "2023-11-07",
-        "next_date": "2024-06-05"
+        "next_date": "2024-06-05",
+        "protocol": "23/OT от 08.06.23",
+        "notation": "что-то ",
+        "place": "ИВЦ"
       },
       {
         "id": 2,
         "exam_name": "ПБ",
         "exam_type_id": 2,
         "date": "2023-11-24",
-        "next_date": "2025-06-03"
+        "next_date": "2025-06-03",
+        "protocol": "387-1/1-27-29 от 22.03.2023",
+        "notation": "что-то о чем-точто-то о чем-точто-то о чем-точто-то о чем-точто-то о чем-то",
+        "place": "ФКЦ"
       }
     ]
   },
@@ -34,6 +40,17 @@
     "subdivision": "траекторщеки",
     "division": "ИВЦ",
     "certificate": 2,
+    "exams": []
+  },
+  {
+    "fio": "Челиков Челик Челикович",
+    "position_id": 3,
+    "subdivision_id": 3,
+    "id": 9,
+    "position": "Специалист",
+    "subdivision": "отдел негры",
+    "division": "ИП-5",
+    "certificate": null,
     "exams": []
   },
   {
@@ -51,7 +68,10 @@
         "exam_name": "ПБ",
         "exam_type_id": 2,
         "date": "2023-12-13",
-        "next_date": "2024-10-09"
+        "next_date": "2024-10-09",
+        "protocol": "743gcs",
+        "notation": "notation",
+        "place": "ИВЦ"
       }
     ]
   }
