@@ -1,3 +1,8 @@
+// const Urls = {
+//   employeeData: '/employees/get_all_with_exams/',
+//   navPillsData: '/divisions/',
+// };
+
 const Urls = {
   employeeData: './response.json',
   navPillsData: './navPillsData.json',
