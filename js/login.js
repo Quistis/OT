@@ -1,5 +1,5 @@
 const loginForm = document.querySelector(".login__form");
-console.log(loginForm);
+const loginError = loginForm.querySelector('.login__register');
 
 loginForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -26,22 +26,22 @@ loginForm.addEventListener('submit', (evt) => {
     .then((response) => {
       
       if (!response.ok) {
-        alert('ERROR');
+        loginError.style.display = 'block';
+        setTimeout(() => {
+          loginError.style.display = 'none';
+        }, 2000);
+        return 0;
       };
-      return response.json();
-    } )
-    .then((data) => {
-        console.log(data);
-        // if (data.detail === 'LOGIN_BAD_CREDENTIALS') {
-        //   alert('ERROR');
-        // };
+      location.href = '/';
+    })
+    // .then((data) => {
+    //     console.log(data);
+    //     // if (data.detail === 'LOGIN_BAD_CREDENTIALS') {
+    //     //   alert('ERROR');
+    //     // };
         
-      })
+    //   })
     .catch((err) => {
       console.log(err);
     });
-
-
-    // uploadData(onSuccess, onFail, 'POST', formData);
-
   });

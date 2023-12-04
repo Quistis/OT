@@ -1,8 +1,8 @@
-import { renderEmployees } from 'static/js/renderEmployeeList.js';
-// import { getNavPillsData } from 'static/js/api.js';
+// import { renderEmployees } from '/static/js/renderEmployeeList.js';
+// import { getEmployeesData, getNavPillsData } from '/static/js/api.js';
 
 import { renderEmployees } from './renderEmployeeList.js';
-import { getEmployeesData, getEmployeesData, getNavPillsData } from './api.js';
+import { getEmployeesData, getNavPillsData } from './api.js';
 
 //const ACTIVE_CLASS = 'active';
 
@@ -65,7 +65,14 @@ const onFiltersListClick = (evt) => {
       return;
     }
 
-    const url = `http://192.168.163.199/employees/get_all_with_exams?division=${targetId}`;
+    const selectedButton = filtersList.querySelector('.active');
+    
+    selectedButton.classList.remove('active');
+    
+
+    evt.target.classList.add('active');
+
+    const url = `http://127.0.0.1:8000/employees/get_all_with_exams?division=${targetId}`;
 
     sendRequest(onDataSuccess, url);
   }
