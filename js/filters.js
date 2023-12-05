@@ -59,18 +59,19 @@ const onFiltersListClick = (evt) => {
   if (isButton(evt)) {
     const targetId = evt.target.id.replace('filter-', '');
 
+    const selectedButton = filtersList.querySelector('.active');
+    
+    selectedButton.classList.remove('active');
+
+    evt.target.classList.add('active');
+
     if (targetId === 'everyone') {
       getEmployeesData(onDataSuccess);
 
       return;
     }
 
-    const selectedButton = filtersList.querySelector('.active');
     
-    selectedButton.classList.remove('active');
-    
-
-    evt.target.classList.add('active');
 
     const url = `http://127.0.0.1:8000/employees/get_all_with_exams?division=${targetId}`;
 
