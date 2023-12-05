@@ -1,8 +1,8 @@
-import { renderEmployees } from 'static/js/renderEmployeeList.js';
+//import { renderEmployees } from 'static/js/renderEmployeeList.js';
 // import { getNavPillsData } from 'static/js/api.js';
 
 import { renderEmployees } from './renderEmployeeList.js';
-import { getEmployeesData, getEmployeesData, getNavPillsData } from './api.js';
+import { getEmployeesData, getNavPillsData } from './api.js';
 
 //const ACTIVE_CLASS = 'active';
 
@@ -65,7 +65,7 @@ const onFiltersListClick = (evt) => {
       return;
     }
 
-    const url = `http://192.168.163.199/employees/get_all_with_exams?division=${targetId}`;
+    const url = `http://192.168.97.199:8000/employees/get_all_with_exams?division=${targetId}`;
 
     sendRequest(onDataSuccess, url);
   }

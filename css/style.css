@@ -1,3 +1,10 @@
+body {
+  height: 100vh;
+  background-image: url('/img/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .container, .container-fluid {
     width: 80%;
 }
