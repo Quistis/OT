@@ -45,8 +45,7 @@
                   <li><a class="dropdown-item" href="/Sibdivisions-settings.html">Подразделения</a></li>
                   <li><a class="dropdown-item" href="/employees-settings.html">Сотрудники</a></li>
                   <li><a class="dropdown-item" href="/positions-settings.html">Должности</a></li>
-                  <li><a class="dropdown-item" href="/exams-settings.html">Виды экзаменов</a></li>
-
+                  <li><a class="dropdown-item" href="/exam-types">Виды экзаменов</a></li>
                 </ul>
               </li>
             </ul>
@@ -58,22 +57,40 @@
         </div>
     </nav>
 
-    <div class="container-fluid mt-3 mb-3 border p-2">
-        <table class="table table-striped table-hover">
+    <div class="container-fluid mt-3 mb-3  p-2">
+
+      <!-- Кнопки -->
+      <ul class="nav nav-pills mb-3 gap-1">
+
+        <li class="nav-item m-1">
+          <a href="/certificates" class="nav-link {{'active' if assigned == None}}" id="everyone" aria-current="page">Все</a>
+        </li>
+
+        <li class="nav-item m-1">
+          <a href="/certificates?assigned=true" class="nav-link {{'active' if assigned}}" id="assigned">Присвоенные</a>
+        </li>
+
+        <li class="nav-item  m-1">
+          <a href="/certificates?assigned=false" class="nav-link {{'active' if assigned == False}}" id="unassigned">Не присвоенные</a>
+        </li>
+
+      </ul>
+
+        <table class="table table-striped table-hover border">
             <thead>
               <tr>
                 <th class="certificate-num" scope="col">#</th>
-                <th class="certificate-number" scope="col">Номер удостоверения</th>
                 <th class="certificate-employee" scope="col">Сотрудник</th>
+                <th class="certificate-number" scope="col">Номер удостоверения</th>  
               </tr>
             </thead>
            
             <tbody>
                 {% for item in certificates %}
                     <tr>
-                        <th class="exam-number" scope="row">{{loop.index}}</th>
-                        <td class="exam-name">{{item.number}}</td>
+                        <th class="exam-number" scope="row">{{loop.index}}</th> 
                         <td class="exam-date">{{item.employee if item.employee else 'Не присвоено'}}</td>
+                        <td class="exam-name">{{item.number}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
