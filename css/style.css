@@ -34,6 +34,8 @@ th, td {
   z-index: 999;
 }
 
+
+
 .margin {
     margin: 5px;
 }
@@ -133,3 +135,27 @@ th, td {
   width: clamp(80px, 115px, 130px);
 }
 
+.certificate-num {
+  width: 5px;
+}
+
+.certificate-number {
+  width: 30px;
+}
+
+.certificate-employee {
+  width: clamp(80px, 115px, 130px);
+}
+
+.dropdown:hover {
+  opacity: 1;
+}
+
+.exam-type-description {
+  overflow-wrap: break-word;
+}
+
+.exam-type-edit-btn:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
