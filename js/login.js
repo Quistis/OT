@@ -5,10 +5,6 @@ loginForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
   
     const formData = new FormData(evt.target);
-    console.log(formData);
-
-
-    
 
     fetch(
       '/auth/jwt/login',
