@@ -1,8 +1,8 @@
 body {
   height: 100vh;
-  background-image: url('/img/bg.jpg');
+  background-image: url('/static/img/bg.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 .container, .container-fluid {
@@ -116,7 +116,7 @@ th, td {
 }
 
 .exam-name {
-  width: clamp(90px, 95px, 120px);
+  width: clamp(100px, 150px, 200px);
 }
 
 .exam-protocol {
@@ -155,7 +155,15 @@ th, td {
   overflow-wrap: break-word;
 }
 
-.exam-type-edit-btn:hover {
+.exam-type-edit-btn:hover, .edit-position-btn:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+
+.positions-container {
+  width: 50%;
+}
+
+.position-num {
+  width: clamp(30px, 40px, 50px);
 }

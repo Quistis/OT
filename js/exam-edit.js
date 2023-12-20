@@ -24,7 +24,7 @@ for (const btn of editButtons) {
 }
 
 addExamType.addEventListener('click', () => {
-  
+
   editForm.dataset.examId = null;
   editName.value = null;
   editPeriod.value = null;
@@ -39,40 +39,8 @@ editForm.addEventListener('submit', (evt) => {
 
   let object = {};
   formData.forEach((value, key) => object[key] = value);
-  
-  if (editForm.dataset.examId != null) {
-    fetch(
-      `/exam_types/update/${editForm.dataset.examId}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(object)
-      },
-    )
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data.id);
-  
-        const examRow = document.querySelector(`#exam-id-${data.id}`);
-  
-        const examName = examRow.querySelector('.exam-type-name');
-        const examPeriod = examRow.querySelector('.exam-type-period');
-        const examDescription = examRow.querySelector('.exam-type-description');
-  
-        examName.textContent = object.name;
-        examPeriod.textContent = object.period;
-        examDescription.textContent  = object.description;
-  
-        closeButton.click();
-  
-      })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-  else {
+  console.log(editForm.dataset.examId);
+  if (editForm.dataset.examId !== null) {
     fetch(
       `/exam_types/add`,
       {
@@ -90,5 +58,32 @@ editForm.addEventListener('submit', (evt) => {
     .catch((err) => {
       console.log(err);
     });
+  } else {
+    fetch(
+      `/exam_types/update/${editForm.dataset.examId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
+      },
+    )
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+  
+        const examRow = document.querySelector(`#exam-id-${data.id}`);
+  
+        const examName = examRow.querySelector('.exam-type-name');
+        const examPeriod = examRow.querySelector('.exam-type-period');
+        const examDescription = examRow.querySelector('.exam-type-description');
+  
+        examName.textContent = object.name;
+        examPeriod.textContent = object.period;
+        examDescription.textContent  = object.description;
+  
+        closeButton.click();
+      });
   }
 });

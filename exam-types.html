@@ -44,7 +44,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/Sibdivisions-settings.html">Подразделения</a></li>
                   <li><a class="dropdown-item" href="/employees-settings.html">Сотрудники</a></li>
-                  <li><a class="dropdown-item" href="/positions-settings.html">Должности</a></li>
+                  <li><a class="dropdown-item" href="/positions">Должности</a></li>
                   <li><a class="dropdown-item" href="/exam-types">Виды экзаменов</a></li>
                 </ul>
               </li>
@@ -101,18 +101,6 @@
                     </td>
                   </tr>
                 {% endfor %}
-                <!-- <tr id="exam-id-1">
-                    <th class="exam-type-num" scope="row">1</th> 
-                    <td class="exam-type-name">ПБ </td>
-                    <td class="exam-type-period">365</td>
-                    <td class="exam-type-description"> 
-                        ыимоытмывлмьылвмьылмоадмьвамбьвалмьвдалмьвмдвалмьаьавлмьdsfsdfsdfsdfsdfsfsfsfssdfsdfsdfsdfsdf</td>
-                    <td> 
-                      <a class="edit-exam-type-btn ms-4" type="button" data-exam-id="1" data-bs-toggle="modal" data-bs-target="#exam-edit">            
-                        <img src="{{ url_for('static', path='img/icon-edit.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать">
-                      </a>
-                    </td>
-                </tr> -->
             </tbody>
           </table>
           <button class="btn btn-primary add-exam-type-btn" type="button" data-bs-toggle="modal" data-bs-target="#exam-edit">Добавить вид экзамена</button>

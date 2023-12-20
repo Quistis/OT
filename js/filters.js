@@ -1,8 +1,8 @@
-// import { renderEmployees } from '/static/js/renderEmployeeList.js';
-// import { getEmployeesData, getNavPillsData } from '/static/js/api.js';
+import { renderEmployees } from '/static/js/renderEmployeeList.js';
+import { getEmployeesData, getNavPillsData } from '/static/js/api.js';
 
-import { renderEmployees } from './renderEmployeeList.js';
-import { getEmployeesData, getNavPillsData } from './api.js';
+// import { renderEmployees } from './renderEmployeeList.js';
+// import { getEmployeesData, getNavPillsData } from './api.js';
 
 //const ACTIVE_CLASS = 'active';
 
@@ -70,7 +70,7 @@ const onFiltersListClick = (evt) => {
       return;
     }
 
-    const url = `http://127.0.0.1:8000/employees/get_all_with_exams?division=${targetId}`;
+    const url = `/employees/get_all_with_exams?division=${targetId}`;
 
     sendRequest(onDataSuccess, url);
   }
