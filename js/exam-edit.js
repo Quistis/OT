@@ -25,7 +25,7 @@ for (const btn of editButtons) {
 
 addExamType.addEventListener('click', () => {
 
-  editForm.dataset.examId = null;
+  editForm.dataset.examId = '0';
   editName.value = null;
   editPeriod.value = null;
   editDescription.value = null;
@@ -39,8 +39,7 @@ editForm.addEventListener('submit', (evt) => {
 
   let object = {};
   formData.forEach((value, key) => object[key] = value);
-  console.log(editForm.dataset.examId);
-  if (editForm.dataset.examId !== null) {
+  if (editForm.dataset.examId === '0') {
     fetch(
       `/exam_types/add`,
       {

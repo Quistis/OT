@@ -59,14 +59,14 @@ th, td {
     border-radius: 5px;
 }
 /*Стили для карточек сотрудников и вложенных данных*/
-.employee-list {
+.employee-list, .division-list {
     width: 100%;
 
     margin: 0;
     padding: 0;
 }
 
-.employee-card {
+.employee-card, .disivion-card {
     width: 100%;
 }
 
@@ -93,7 +93,7 @@ th, td {
   opacity: 0.3;
 }
 
-.add-exam__btn:hover, .edit-employee-info__btn:hover {
+.add-exam__btn:hover, .edit-employee-info__btn:hover, .add-division__btn:hover, .save-info__btn:hover{
   opacity: 0.3;
 }
 
@@ -139,8 +139,8 @@ th, td {
   width: 5px;
 }
 
-.certificate-number {
-  width: 30px;
+.certificate-number, .group-number {
+  width: clamp(20px, 40px, 50px);
 }
 
 .certificate-employee {

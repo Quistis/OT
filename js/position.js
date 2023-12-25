@@ -29,7 +29,6 @@ editForm.addEventListener('submit', (evt) => {
   const formData = new FormData(evt.target);
 
   let object = {};
-  console.log(editForm.dataset.positionId)
   formData.forEach((value, key) => object[key] = value);
   if (editForm.dataset.positionId === '0') {
     fetch(
