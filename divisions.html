@@ -61,8 +61,9 @@
 
         <ul class="disivion-list d-flex flex-column justify-content-between align-items-start flex-wrap">
             {% for division in divisions %}
-                <form class="group-form" id="division-id-{{division.id}}"></form>
+                
                 <li class="disivion-list__card disivion-card card mb-3">
+                <form class="group-form" id="division-id-{{division.id}}">
                 <div class="disivion-card__header card-header d-flex justify-content-start align-items-center">
                 
                 <h5 class="card-header__name text-center d-block">{{division.name}}</h5>
@@ -75,11 +76,11 @@
                     <img src="/static/img/icon-plus.svg" width="28px" height="28px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить группу">
                 </a>
 
-                <a class="save-info__btn" type="submit">
+                <button class="save-info__btn" type="submit">
                     <!-- <img src="./img/icon-edit.png" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать сотрудника"> -->
 
-                    <img src="/static/img/icon-save.png" width="26px" height="26px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Сохранить">
-                </a>
+                    <img src="/static/img/icon-save.png" width="25px" height="25px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Сохранить">
+                </button>
 
                 </div>
                 <div class="collapse" id="collapse-{{division.id}}">
@@ -97,7 +98,7 @@
                                 <tr>
                                     <th class="group-number" scope="row">{{loop.index}}</th>
                                     <td >
-                                    <input name="input-group" autocomplete="off" type="text" class="form-control edit-period" value="{{subdivision.name}}" aria-describedby="basic-addon1" required>
+                                    <input name="{{subdivision.id}}" data-subdivision-id='{{subdivision.id}}' autocomplete="off" type="text" class="form-control edit-period" value="{{subdivision.name}}" aria-describedby="basic-addon1" required>
                                     </td>
                                     <!-- <td class="group-name">экзамен на анимешника</td> -->
                                 </tr>

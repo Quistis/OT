@@ -167,3 +167,8 @@ th, td {
 .position-num {
   width: clamp(30px, 40px, 50px);
 }
+.save-info__btn {
+  background-color: transparent; 
+  background-repeat: no-repeat; 
+  border: none;
+}
