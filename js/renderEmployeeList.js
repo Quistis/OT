@@ -95,6 +95,17 @@ const createEmployeeCard = (employee) => {
     tableBody.append(examsFragment);
   }
 
+  let addButton = employeeCard.querySelector('.add-exam__btn');
+
+  addButton.setAttribute('data-employee-id', employee.id);
+  
+  addButton.addEventListener('click', () => {
+
+    const addExamForm = document.querySelector('.add-exam-form');
+    addExamForm.dataset.employeeId = addButton.dataset.employeeId;
+  
+  });
+
   return employeeCard;
 };
 
@@ -104,4 +115,4 @@ const renderEmployees = (data) => {
   });
 };
 
-export {renderEmployees};
+export {renderEmployees, createExamination};

@@ -3,7 +3,8 @@
 // import '/static/js/filters.js';
 
 import { getEmployeesData } from './api.js';
-import { renderEmployees } from './renderEmployeeList.js';
+import { renderEmployees} from './renderEmployeeList.js';
+import { addExam } from './add-exam.js';
 import './filters.js';
 
 let employees = [];
@@ -14,3 +15,6 @@ const onSuccess = (data) => {
 };
 
 getEmployeesData(onSuccess);
+
+const addExamForm = document.querySelector('.add-exam-form');
+addExamForm.addEventListener('submit', addExam);

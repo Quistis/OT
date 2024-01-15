@@ -125,40 +125,59 @@
       </div>
     </div>
 <!-- Модальное окно добавления экзамена -->
-    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="addBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="staticBackdropLabel">Добавление экзамена</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <form class="add-exam-form" data-employee-id="">
+            <div class="modal-body">
+              <div class="input-group mb-4">
+                <label class="input-group-text modal-size-2" for="examSelect">Экзамен</label>
+                <select name="exam_type_id" class="form-select" id="examSelect" autocomplete="off" required>
+                  {% for examType in examTypes %}
+                    <option value="{{examType.id}}">{{examType.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
 
-            <div class="input-group mb-3">
-              <label class="input-group-text modal-size-2" for="inputGroupSelect01">Экзамен</label>
-              <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">ОТ</option>
-                <option value="2">ПБ</option>
-                <option value="3">ЭБ</option>
-              </select>
+              <div class="input-group mb-4">
+                <span class="input-group-text modal-size-2" id="protocolLabel">Протокол</span>
+                <input name="protocol" type="text" class="form-control protocol-input" autocomplete="off" aria-describedby="basic-addon1" id="validationServer01" required>
+              </div>
+
+              <div class="input-group mb-4">
+                <span class="input-group-text modal-size-2" id="basic-addon1">Дата сдачи</span>
+                <input name="date" type="date" class="form-control date-input" autocomplete="off" placeholder="Номер удостоверения" required>
+              </div>
+
+              <div class="input-group mb-4">
+                <span class="input-group-text modal-size-3" id="basic-addon1">Дата следующей сдачи</span>
+                <input name="next_date" type="date" class="form-control next-date-input" autocomplete="off" placeholder="Номер удостоверения">
+              </div>
+
+              <div class="input-group mb-4">
+                <label class="input-group-text modal-size-2" for="place-select">Место</label>
+                <select name="place" class="form-select place-input" autocomplete="off" id="place-select">
+                  <option value="ИВЦ" selected>ИВЦ</option>
+                  <option value="ФКЦ">ФКЦ</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-text">Примечание</span>
+                <textarea name="notation" class="form-control text-input" autocomplete="off" aria-label="With textarea"></textarea>
+              </div>
+            
+
             </div>
-
-            <div class="input-group mb-3">
-              <span class="input-group-text modal-size-2" id="basic-addon1">Дата сдачи</span>
-              <input type="date" class="form-control" placeholder="Номер удостоверения" aria-label="Номер удостоверения" aria-describedby="basic-addon1">
+            <div class="modal-footer">
+              <button type="reset" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>
+              <button type="submit" class="btn btn-primary">Принять</button>
             </div>
-
-            <div class="input-group mb-3">
-              <span class="input-group-text modal-size-2" id="basic-addon1">Дата следующей сдачи</span>
-              <input type="date" class="form-control" placeholder="Номер удостоверения" aria-label="Номер удостоверения" aria-describedby="basic-addon1">
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button type="button" class="btn btn-primary">Принять</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -173,7 +192,7 @@
 
           <a class="arrow-down" data-bs-toggle="collapse" href="#24" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 
-          <a class="add-exam__btn me-2" href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+          <a class="add-exam__btn me-2" type="button" data-bs-toggle="modal" data-bs-target="#addBackdrop">
 
             <!-- <img src="./img/icon-plus.svg" width="28px" height="28px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить экзамен"> -->
             <img src="{{ url_for('static', path='img/icon-plus.svg') }}" width="28px" height="28px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить экзамен">
@@ -199,41 +218,6 @@
               <p class="employee-certificate card-text"></p>
 
             </div>
-            <!--
-            <div class="employee-examaminations col-4">
-              <table class="employee-examaminations__table examinations-table table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Экзамен</th>
-                    <th scope="col">Дата сдачи</th>
-                    <th scope="col">Дата следующей сдачи</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th class="exam-number" scope="row">1</th>
-                    <td class="exam-name">ОТ - Программа "Б"</td>
-                    <td class="exam-date">24.24.24</td>
-                    <td class="exam-next-date">25.25.25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>ЭБ группа 2</td>
-                    <td>12.12.12</td>
-                    <td>13.13.13</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>ЭБ группа 3</td>
-                    <td>12.12.12</td>
-                    <td>13.13.13</td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-            -->
           </div>
 
         </div>
@@ -256,26 +240,7 @@
             </tr>
           </thead>
           <tbody>
-            <!--
-            <tr>
-              <th class="exam-number" scope="row">1</th>
-              <td class="exam-name">ОТ - Программа "Б"</td>
-              <td class="exam-date">24.24.24</td>
-              <td class="exam-next-date">25.25.25</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>ЭБ группа 2</td>
-              <td>12.12.12</td>
-              <td>13.13.13</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>ЭБ группа 3</td>
-              <td>12.12.12</td>
-              <td>13.13.13</td>
-            </tr>
-          -->
+
           </tbody>
         </table>
       </div>
