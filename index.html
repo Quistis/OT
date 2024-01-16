@@ -87,40 +87,45 @@
             <h1 class="modal-title fs-5" id="staticBackdropLabel">Редактировать</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <form class="edit-employee-form" data-employee-id="">
+            <div class="modal-body">
 
-            <div class="input-group mb-3">
-              <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Должность</label>
-              <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">Инженер</option>
-                <option value="2">Инженер 2 категории</option>
-                <option value="3">Инженер 3 категории</option>
-              </select>
+              <div class="input-group mb-3">
+                <span class="input-group-text " id="protocolLabel">ФИО</span>
+                <input name="fio" type="text" class="form-control fio-input" autocomplete="off" aria-describedby="basic-addon1" id="validationServer01" required>
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Должность</label>
+                <select name="position_id" class="form-select position-input" autocomplete="off" id="inputGroupSelect01">
+                  <!-- <option value="0" selected disabled hidden>Choose here</option> -->
+                  {% for position in positions %}
+                      <option value="{{position.id}}">{{position.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="input-group mb-3">
+                <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Подразделение</label>
+                <select name="subdivision_id" class="form-select subdivision-input" autocomplete="off" id="inputGroupSelect01">
+                  <!-- <option value="0" selected disabled hidden>Choose here</option> -->
+                  {% for subdivison in subdivisons %}
+                      <option value="{{subdivison.id}}">{{subdivison.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Номер удостоверения</span>
+                <input name="certificate_id" type="number" class="form-control certificate-input" autocomplete="off" placeholder="Номер (1-500)" aria-label="Номер удостоверения" aria-describedby="basic-addon1">
+              </div>
+
             </div>
-
-            <div class="input-group mb-3">
-              <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Подразделение</label>
-              <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="4">Two</option>
-                <option value="5">Three</option>
-              </select>
+            <div class="modal-footer">
+              <button type="reset" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>
+              <button type="submit" class="btn btn-primary">Принять</button>
             </div>
-
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Номер удостоверения</span>
-              <input type="number" class="form-control" placeholder="Номер удостоверения" aria-label="Номер удостоверения" aria-describedby="basic-addon1">
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button type="button" class="btn btn-primary">Принять</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -206,7 +211,7 @@
 
         </div>
 
-        <div class="collapse" id="24">
+        <div class="collapse" id="">
 
           <div class="card-body row d-flex justify-content-start align-items-start flex-wrap">
 

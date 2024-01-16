@@ -57,6 +57,7 @@ const createEmployeeCard = (employee) => {
 
   const employeeName = employeeCard.querySelector('.card-header__name');
   employeeName.textContent = employee.fio;
+  employeeName.id = `employee-name-${employee.id}`;
 
   const openEmployeeInfoBtn = employeeCard.querySelector('.arrow-down');
   openEmployeeInfoBtn.href = `#${employee.id}`;
@@ -103,6 +104,42 @@ const createEmployeeCard = (employee) => {
 
     const addExamForm = document.querySelector('.add-exam-form');
     addExamForm.dataset.employeeId = addButton.dataset.employeeId;
+  
+  });
+
+  let editButton = employeeCard.querySelector('.edit-employee-info__btn');
+
+  editButton.setAttribute('data-employee-id', employee.id);
+  
+  editButton.addEventListener('click', () => {
+
+    const editEmployeeForm = document.querySelector('.edit-employee-form');
+    editEmployeeForm.dataset.employeeId = editButton.dataset.employeeId;
+
+    const fioInput = editEmployeeForm.querySelector('.fio-input');
+    const positionInput =  editEmployeeForm.querySelector('.position-input');
+    const subdivisionInput = editEmployeeForm.querySelector('.subdivision-input');
+    const certificateInput = editEmployeeForm.querySelector('.certificate-input');
+    let employeeId = editEmployeeForm.dataset.employeeId;
+
+    const collapse = document.getElementById(`${employeeId}`);
+
+    const fio = document.querySelector(`#employee-name-${employeeId}`).textContent;
+    const position =  collapse.querySelector('.employee-position').textContent.replace('Должность: ', '');
+    const subdivision = collapse.querySelector('.employee-subdivision').textContent.replace('Группа, отдел: ', '');
+    const certificate = collapse.querySelector('.employee-certificate').textContent.replace('Номер удостоверения: ', '');
+    fioInput.value = fio;
+    certificateInput.value = certificate;
+    for (const pos of positionInput.options){
+      if (pos.textContent == position) {
+        pos.selected = true;
+      }
+    };
+    for (const sub of subdivisionInput.options){
+      if (sub.textContent == subdivision) {
+        sub.selected = true;
+      }
+    };
   
   });
 
