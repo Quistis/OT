@@ -120,6 +120,14 @@
                 <input name="certificate_id" type="number" class="form-control certificate-input" autocomplete="off" placeholder="Номер (1-500)" aria-label="Номер удостоверения" aria-describedby="basic-addon1">
               </div>
 
+              <div class="input-group mb-3">
+                <label class="input-group-text modal-size-2" for="state-select" style="width:150px" >Статус</label>
+                <select name="is_active" class="form-select place-input" autocomplete="off" id="place-select">
+                  <option value="true" selected>В штате</option>
+                  <option value="false">Уволен</option>
+                </select>
+              </div>
+
             </div>
             <div class="modal-footer">
               <button type="reset" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>

@@ -57,7 +57,13 @@ function editEmployee(evt) {
   let employeeId = editEmployeeForm.dataset.employeeId;
 
   let object = {};
-  formData.forEach((value, key) => object[key] = value);
+  formData.forEach((value, key) => {
+    if (value.length > 0) {
+      object[key] = value;
+    }
+  });
+  console.log(object);
+  
 
   fetch(
     `/employees/update/${employeeId}/`,
