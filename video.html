@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', path='css/plyr.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', path='css/video.css') }}">
+   <title>{{video.name}}</title>
+</head>
+<body>
+   
+<div class="plyr">
+   <h1 class="plyr__headline">CHIPI CHIPI CHAPA CHAPA</h1>
+   <video class="player__first" id="player" autoplay playsinline controls loop>
+      <source src="/get_video/{{video.name}}" type="video/mp4" />
+   </video>
+</div>
+
+<script src="{{ url_for('static', path='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', path='js/plyr.js') }}"></script>
+<script>
+   const player = new Plyr('#player');
+</script>
+</body>
+</html>
