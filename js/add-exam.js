@@ -6,9 +6,12 @@ function addExam(evt) {
   const addExamForm = document.querySelector('.add-exam-form');
   const formData = new FormData(evt.target);
   let employee_id = addExamForm.dataset.employeeId;
+  let exam_id = addExamForm.dataset.examId;
+  const closeButton = addExamForm.querySelector(".close-button");
 
   let object = {};
   formData.forEach((value, key) => object[key] = value);
+  if (exam_id === '0') {
     fetch(
       `/exams/add/?employee_id=${employee_id}`,
       {
@@ -24,7 +27,7 @@ function addExam(evt) {
         const collapse = document.getElementById(`${employee_id}`);
         const tableBody = collapse.querySelector('tbody');
 
-        const closeButton = addExamForm.querySelector(".close-button");
+        
         closeButton.click();
         
         if (tableBody == null) {
@@ -36,16 +39,49 @@ function addExam(evt) {
           cardBody.append(examinationsTableContainer);
           const tableBody = collapse.querySelector('tbody');
 
-          const row = createExamination(data, 0);
+          const row = createExamination(data, 0, employee_id);
           
           tableBody.append(row);
         }
         else {
           const rows = tableBody.querySelectorAll("tr");
-          const row = createExamination(data, rows.length);
+          const row = createExamination(data, rows.length, employee_id);
           tableBody.append(row);
         };
       });
+  } else {
+    fetch(
+      `/exams/update?exam_id=${exam_id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
+      },
+    )
+    .then((response) => response.json())
+    .then((data) => {
+        closeButton.click();
+
+        const examRow = document.querySelector(`.exam-id-${exam_id}`);
+
+        const exam = examRow.querySelector('.exam-name');
+        const protocol = examRow.querySelector('.exam-ptotocol');
+        const date = examRow.querySelector('.exam-date');
+        const nextDate = examRow.querySelector('.exam-next-date');
+        const place = examRow.querySelector('.exam-place');
+        const notation = examRow.querySelector('.exam-notation');
+
+        exam.textContent = data.exam_type.name;
+        protocol.textContent = data.protocol;
+        date.textContent = data.date;
+        nextDate.textContent = data.nextDate;
+        place.textContent = data.place;
+        notation.textContent = data.notation;
+      
+      });
+  };
 }
 
 function editEmployee(evt) {
@@ -97,4 +133,35 @@ function editEmployee(evt) {
 
 }
 
-export {addExam, editEmployee};
+function delExam(evt) {
+  const addExamForm = document.querySelector('.add-exam-form');
+  let exam_id = addExamForm.dataset.examId;
+  let employee_id = addExamForm.dataset.employeeId;
+  const closeButton = addExamForm.querySelector(".close-button");
+
+  fetch(
+    `/exams/del?exam_id=${exam_id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    },
+  )
+  .then( () => {
+    closeButton.click();
+    const examRow = document.querySelector(`.exam-id-${exam_id}`);
+    examRow.remove();
+
+    const collapse = document.getElementById(`${employee_id}`);
+    const tableBody = collapse.querySelector('tbody');
+    const rows = tableBody.querySelectorAll("tr");
+    for (let i=0; i <= rows.length; i++) {
+      rows[i].querySelector('.exam-number').textContent = i + 1;
+    }
+
+  });
+}
+
+
+export {addExam, editEmployee, delExam};

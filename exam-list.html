@@ -29,16 +29,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/">Главная</a>
+                <a class="nav-link" href="/">Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/exams-list">Подробный список</a>
+                <a class="nav-link active" href="/exams-list">Подробный список</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/certificates">Удостоверения</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Настройки
                 </a>
                 <ul class="dropdown-menu">
@@ -58,7 +58,7 @@
     </nav>
 
     <div class="container-fluid mt-3 mb-3  p-2">
-      <h1 class="exam-type-title "> Виды экзаменов </h1>
+      <h1 class="exam-type-title "> Список экзаменов </h1>
       <!-- Кнопки
       <ul class="nav nav-pills mb-3 gap-1">
 
@@ -76,34 +76,61 @@
 
       </ul> -->
 
-        <table class="table table-striped exam-type-table table-hover border mb-4 rounded">
-            <thead>
+      <div class="examaminations-list">
+        <table class="examinations-table table table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="exam-number" scope="col">#</th>
+              <th class="exam-list-employee col-3" scope="col">Сотрудник</th>
+              <th class="exam-list-name col-2" scope="col">Экзамен</th>
+              <th class="exam-list-protocol col-1" scope="col">Протокол</th>
+              <th class="exam-list-date col-1" scope="col">Дата сдачи</th>
+              <th class="exam-list-next-date col-1" scope="col">Следующая сдача</th>
+              <th class="exam-list-place col-1" scope="col">Место сдачи</th>
+              <th class="exam-list-notation col-3" scope="col">Примечание</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for exam in exams %}
               <tr>
-                <th class="exam-type-num col-1" scope="col">#</th>
-                <th class="exam-type-name col-3" scope="col">Наименование</th>
-                <th class="exam-type-period col-1" scope="col">Период (дней)</th>  
-                <th class="exam-type-description col-6" scope="col">Описание</th>  
-                <th class="exam-type-edit" scope="col-1"></th>  
+                <th class="exam-list-number">{{loop.index}}</th>
+                <th class="exam-list-employee">{{exam.employee}}</th>
+                <th class="exam-list-name">{{exam.exam_name}}</th>
+                <th class="exam-list-protocol">{{exam.protocol}}</th>
+                <th class="exam-list-date">{{exam.date}}</th>
+                <th class="exam-list-next-date">{{exam.next_date}}</th>
+                <th class="exam-list-place">{{exam.place}}</th>
+                <th class="exam-list-notation">{{exam.notation}}</th>
               </tr>
-            </thead>
-           
-            <tbody>
-                {% for exam_type in exam_types %}
-                  <tr id="exam-id-{{exam_type.id}}">
-                    <th class="exam-type-num" scope="row">{{loop.index}}</th> 
-                    <td class="exam-type-name">{{exam_type.name}}</td>
-                    <td class="exam-type-period">{{exam_type.period}}</td>
-                    <td class="exam-type-description">{{exam_type.description}}</td>
-                    <td> 
-                      <a class="edit-exam-type-btn ms-4" type="button" data-exam-id="{{exam_type.id}}" data-bs-toggle="modal" data-bs-target="#exam-edit">            
-                        <img src="{{ url_for('static', path='img/icon-edit.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать">
-                      </a>
-                    </td>
-                  </tr>
-                {% endfor %}
-            </tbody>
-          </table>
-          <button class="btn btn-primary add-exam-type-btn" type="button" data-bs-toggle="modal" data-bs-target="#exam-edit">Добавить вид экзамена</button>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+              <a class="page-link {{'disabled' if page == 1}}" href="/exams-list?page={{page-1}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% for i in range(max_page) %}
+            {% if i == 0 or i == 1 or i == max_page-1 or i == max_page-2 or i == page or i == page-1 or i == page-2 or i == page-3 or i == page + 1 %}
+              {% if page != i+1 %}
+                <li class="page-item"><a class="page-link" href="/exams-list?page={{i+1}}">{{i+1}}</a></li>
+              {% else %}
+                <li class="page-item active"><a class="page-link" href="/exams-list?page={{i+1}}">{{i+1}}</a></li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <li class="page-item">
+            <a class="page-link {{'disabled' if page == max_page}}" href="/exams-list?page={{page+1}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
     </div>
     
 
@@ -158,7 +185,6 @@
     
     <script src="{{ url_for('static', path='js/bootstrap_js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', path='js/bootstrap_js/tooltip-enable') }}" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', path='js/exam-edit.js') }}"></script>
     
 </body>
 </html>

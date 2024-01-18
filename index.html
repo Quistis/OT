@@ -32,7 +32,7 @@
                 <a class="nav-link active" aria-current="page" href="/">Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Подробный список</a>
+                <a class="nav-link" href="/exams-list">Подробный список</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/certificates">Удостоверения</a>
@@ -142,10 +142,10 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Добавление экзамена</h1>
+            <h1 class="modal-title fs-5 add-exam-title" id="staticBackdropLabel">Добавление экзамена</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form class="add-exam-form" data-employee-id="">
+          <form class="add-exam-form" data-employee-id="" data-exam-id="">
             <div class="modal-body">
               <div class="input-group mb-4">
                 <label class="input-group-text modal-size-2" for="examSelect">Экзамен</label>
@@ -187,6 +187,7 @@
 
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-danger del-exam-button">Удалить</button>
               <button type="reset" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>
               <button type="submit" class="btn btn-primary">Принять</button>
             </div>
@@ -250,6 +251,7 @@
               <th class="exam-next-date" scope="col">Следующая сдача</th>
               <th class="exam-place" scope="col">Место сдачи</th>
               <th class="exam-notation" scope="col">Примечание</th>
+              <th class="exam-edit" style="width: 50px;" scope="col"></th>
             </tr>
           </thead>
           <tbody>

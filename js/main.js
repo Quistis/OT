@@ -4,7 +4,7 @@
 
 import { getEmployeesData } from './api.js';
 import { renderEmployees } from './renderEmployeeList.js';
-import { addExam, editEmployee } from './add-exam.js';
+import { addExam, editEmployee, delExam } from './add-exam.js';
 import './filters.js';
 
 let employees = [];
@@ -21,3 +21,6 @@ addExamForm.addEventListener('submit', addExam);
 
 const editEmployeeForm = document.querySelector('.edit-employee-form');
 editEmployeeForm.addEventListener('submit', editEmployee);
+
+const delButton = document.querySelector('.del-exam-button')
+delButton.addEventListener('click', delExam)

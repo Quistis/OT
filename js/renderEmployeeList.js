@@ -8,8 +8,9 @@ const examinationsTableTemplate = document.querySelector('#examinations-table')
   .content
   .querySelector('.employee-examaminations');
 
-const createExamination = (exam, index) => {
+const createExamination = (exam, index, employee_id) => {
   const examElement = document.createElement('tr');
+  examElement.classList.add(`exam-id-${exam.id}`)
 
   const examNumber = document.createElement('th');
   examNumber.classList.add('exam-number');
@@ -46,6 +47,57 @@ const createExamination = (exam, index) => {
   examNotation.classList.add('exam-notation');
   examNotation.textContent = exam.notation;
   examElement.append(examNotation);
+
+  let new_row_text = `<td> <a class="edit-exam-btn" type="button" data-exam-id="${exam.id}" data-employee-id="${employee_id}" data-bs-toggle="modal" data-bs-target="#addBackdrop"><img src="/static/img/icon-edit.png" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать"></a> </td>`;
+  examElement.insertAdjacentHTML("beforeend", new_row_text);
+
+  const editButton = examElement.querySelector('.edit-exam-btn');
+  editButton.addEventListener('click', () => {
+
+    const title = document.querySelector('.add-exam-title');
+    title.textContent = 'Редактирование экзамена';
+
+    const editExamForm = document.querySelector('.add-exam-form');
+    let examId = editButton.dataset.examId;
+    let employeeId = editButton.dataset.employeeId;
+    editExamForm.dataset.examId = examId;
+    editExamForm.dataset.employeeId = employeeId;
+
+    const examInput = editExamForm.querySelector('#examSelect');
+    const protocolInput =  editExamForm.querySelector('.protocol-input');
+    const dateInput = editExamForm.querySelector('.date-input');
+    const nextDateInput = editExamForm.querySelector('.next-date-input');
+    const placeInput = editExamForm.querySelector('.place-input');
+    const notationInput = editExamForm.querySelector('.text-input');
+
+    const employeeCard = document.getElementById(employeeId);
+    const examRow = employeeCard.querySelector(`.exam-id-${examId}`);
+
+    const exam = examRow.querySelector('.exam-name').textContent;
+    const protocol = examRow.querySelector('.exam-ptotocol').textContent;
+    const date = examRow.querySelector('.exam-date').textContent;
+    const nextDate = examRow.querySelector('.exam-next-date').textContent;
+    const place = examRow.querySelector('.exam-place').textContent;
+    const notation = examRow.querySelector('.exam-notation').textContent;
+
+    protocolInput.value = protocol;
+    dateInput.value = date;
+    nextDateInput.value = nextDate;
+    notationInput.textContent = notation;
+
+    for (const examItem of examInput.options){
+      if (examItem.textContent == exam) {
+        examItem.selected = true;
+      }
+    };
+
+    for (const placeItem of placeInput.options){
+      if (placeItem.textContent == place) {
+        placeItem.selected = true;
+      }
+    };
+  
+  });
 
   return examElement;
 };
@@ -90,7 +142,7 @@ const createEmployeeCard = (employee) => {
     const examsFragment = document.createDocumentFragment();
 
     exams.forEach((exam, index) => {
-      examsFragment.append(createExamination(exam, index));
+      examsFragment.append(createExamination(exam, index, employee.id));
     });
 
     tableBody.append(examsFragment);
@@ -102,8 +154,12 @@ const createEmployeeCard = (employee) => {
   
   addButton.addEventListener('click', () => {
 
+    const title = document.querySelector('.add-exam-title');
+    title.textContent = 'Добавление экзамена';
+
     const addExamForm = document.querySelector('.add-exam-form');
     addExamForm.dataset.employeeId = addButton.dataset.employeeId;
+    addExamForm.dataset.examId = 0;
   
   });
 
