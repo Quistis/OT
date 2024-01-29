@@ -43,7 +43,6 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/divisions-page">Подразделения</a></li>
-                  <li><a class="dropdown-item" href="/employees-settings.html">Сотрудники</a></li>
                   <li><a class="dropdown-item" href="/positions">Должности</a></li>
                   <li><a class="dropdown-item" href="/exam-types">Виды экзаменов</a></li>
                 </ul>
@@ -60,20 +59,30 @@
 
 <!--Навигация по подразделениям-->
     <div class="container-fluid mt-3">
-      <ul class="nav nav-pills mb-3 gap-1">
+      <div class="filter-container d-flex justify-content-between">
+        <ul class="nav nav-pills mb-3 gap-1">
 
-        <li class="nav-item filter-item">
-          <button class="nav-link active" id="everyone" aria-current="page">Все</button>
-        </li>
+          <li class="nav-item filter-item">
+            <button class="nav-link active" id="everyone" aria-current="page">Все</button>
+          </li>
 
-      </ul>
+        </ul>
+        <div class="right-place d-flex gap-3"> 
+          <form class="import-form" action="/file/upload" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+              <input type="file" name="file" class="form-control" autocomplete="off" id="inputFile" accept=".xls, .xlsx" required>
+              <button class="input-group-text" for="inputFile">Импортировать</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
 <!--Карточки сотрудников-->
       <section class="employee-cards d-flex justify-content-between align-items-start flex-wrap">
 
         <ul class="employee-list d-flex flex-column justify-content-between align-items-start flex-wrap">
 
         </ul>
-
       </section>
     </div>
 
@@ -98,7 +107,7 @@
               <div class="input-group mb-3">
                 <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Должность</label>
                 <select name="position_id" class="form-select position-input" autocomplete="off" id="inputGroupSelect01">
-                  <!-- <option value="0" selected disabled hidden>Choose here</option> -->
+                  <option value="0" selected disabled hidden>Выберите значение</option>
                   {% for position in positions %}
                       <option value="{{position.id}}">{{position.name}}</option>
                   {% endfor %}
@@ -108,7 +117,7 @@
               <div class="input-group mb-3">
                 <label class="input-group-text text-center d-block" for="inputGroupSelect01" style="width:150px">Подразделение</label>
                 <select name="subdivision_id" class="form-select subdivision-input" autocomplete="off" id="inputGroupSelect01">
-                  <!-- <option value="0" selected disabled hidden>Choose here</option> -->
+                  <option value="0" selected disabled hidden>Выберите значение</option>
                   {% for subdivison in subdivisons %}
                       <option value="{{subdivison.id}}">{{subdivison.name}}</option>
                   {% endfor %}
@@ -130,8 +139,10 @@
 
             </div>
             <div class="modal-footer">
-              <button type="reset" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>
-              <button type="submit" class="btn btn-primary">Принять</button>
+                <div> 
+                  <button type="reset" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>
+                  <button type="submit" class="btn btn-primary">Принять</button>
+                </div>
             </div>
           </form>
         </div>

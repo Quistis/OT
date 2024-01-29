@@ -29,8 +29,22 @@ const renderFilterPills = (filters) => {
   filters.forEach((filter) => {
     filterFragment.append(createFilterItem(filter));
   });
+  const filterContainer = document.querySelector('.right-place');
+  const addButtonText = "<button class='btn btn-primary d-flex flex-row-reverse mb-3' data-bs-toggle='modal' data-bs-target='#staticBackdrop1' id='addEmployee' aria-current='page'>Добавить сотрудника</button>"
+  
 
   filtersList.append(filterFragment);
+  filterContainer.insertAdjacentHTML('beforeend', addButtonText);
+  const addEmployeeButton = filterContainer.querySelector('#addEmployee');
+  
+  addEmployeeButton.addEventListener('click', () => {
+
+    const editEmployeeForm = document.querySelector('.edit-employee-form');
+    editEmployeeForm.dataset.employeeId = '0';
+  
+  });
+  
+  
 };
 
 getNavPillsData(renderFilterPills);

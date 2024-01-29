@@ -13,7 +13,7 @@ function addExam(evt) {
   formData.forEach((value, key) => object[key] = value);
   if (exam_id === '0') {
     fetch(
-      `/exams/add/?employee_id=${employee_id}`,
+      `/exams/add?employee_id=${employee_id}`,
       {
         method: 'POST',
         headers: {
@@ -98,38 +98,63 @@ function editEmployee(evt) {
       object[key] = value;
     }
   });
-  console.log(object);
   
-
-  fetch(
-    `/employees/update/${employeeId}/`,
-    {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
+  if (employeeId === '0') {
+    fetch(
+      `/employees/add`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
       },
-      body: JSON.stringify(object)
-    },
-  )
-  .then((response) => response.json())
-  .then((data) => {
-      const closeButton = editEmployeeForm.querySelector(".close-button");
-      closeButton.click();
-      
-      const collapse = document.getElementById(`${employeeId}`);
+    )
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code == 1) {
+        console.log('pchel');
+        const footer = editEmployeeForm.querySelector('.modal-footer');
+        const errorText = `<span>${data.detail}</span>`
+        footer.insertAdjacentHTML("afterbegin", errorText);
+      }
+      else {
+        const closeButton = editEmployeeForm.querySelector(".close-button");
+        closeButton.click();
+      }
+      });
+  } else {
+    console.log(object);
+    fetch(
+      `/employees/update/${employeeId}/`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
+      },
+    )
+    .then((response) => response.json())
+    .then((data) => {
+        const closeButton = editEmployeeForm.querySelector(".close-button");
+        closeButton.click();
+        
+        const collapse = document.getElementById(`${employeeId}`);
 
-      const fio = document.querySelector(`#employee-name-${employeeId}`);
-      const position =  collapse.querySelector('.employee-position');
-      const subdivision = collapse.querySelector('.employee-subdivision');
-      const certificate = collapse.querySelector('.employee-certificate');
-      const division = collapse.querySelector('.employee-division');
+        const fio = document.querySelector(`#employee-name-${employeeId}`);
+        const position =  collapse.querySelector('.employee-position');
+        const subdivision = collapse.querySelector('.employee-subdivision');
+        const certificate = collapse.querySelector('.employee-certificate');
+        const division = collapse.querySelector('.employee-division');
 
-      fio.textContent = data.fio;
-      position.textContent = `Должность: ${data.position}`
-      subdivision.textContent = `Группа, отдел: ${data.subdivision}`
-      certificate.textContent = `Номер удостоверения: ${data.certificate}`
-      division.textContent =  `Подразделение: ${data.division}` 
-    });
+        fio.textContent = data.fio;
+        position.textContent = `Должность: ${data.position}`
+        subdivision.textContent = `Группа, отдел: ${data.subdivision}`
+        certificate.textContent = `Номер удостоверения: ${data.certificate}`
+        division.textContent =  `Подразделение: ${data.division}` 
+      });
+  }
 
 }
 
