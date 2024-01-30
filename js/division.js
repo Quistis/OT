@@ -1,6 +1,7 @@
 const addButtons = document.querySelectorAll('.add-division__btn');
 const groupForms = document.querySelectorAll('.group-form');
 const saveButtons = document.querySelectorAll('.save-info__btn');
+const delButtons = document.querySelectorAll('.del-btn');
 
 
 
@@ -13,6 +14,30 @@ for (const btn of addButtons) {
         table.insertAdjacentHTML("beforeend", new_row_text);
     });
 }
+
+for (const btn of delButtons) {
+  btn.addEventListener('click', () => {
+      console.log(btn.dataset.subdivisionId);
+
+      fetch(
+        `/subdivisions/del/${btn.dataset.subdivisionId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        },
+      )
+      .then((response) => 
+      {
+        console.log(response.status);
+        response.json()
+        .then((data) => {
+            console.log(data);
+        })
+      });
+  });
+};
 
 for (const form of groupForms) {
     form.addEventListener('submit', (evt) => {

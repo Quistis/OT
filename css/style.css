@@ -1,6 +1,6 @@
 body {
   height: 100vh;
-  background-image: url('/static/img/bg.jpg');
+  background-image: url('/static/img/bg-1.jpg');
   background-size: cover;
   background-repeat: repeat;
 }
@@ -185,4 +185,8 @@ th, td {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.edit-col {
+  width: 50px;
 }

@@ -32,7 +32,7 @@
                 <a class="nav-link" aria-current="page" href="/">Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Подробный список</a>
+                <a class="nav-link" href="/exams-list">Подробный список</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/certificates">Удостоверения</a>
@@ -42,7 +42,7 @@
                   Настройки
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/divisions">Подразделения</a></li>
+                  <li><a class="dropdown-item" href="/divisions-page">Подразделения</a></li>
                   <li><a class="dropdown-item" href="/positions">Должности</a></li>
                   <li><a class="dropdown-item" href="/exam-types">Виды экзаменов</a></li>
                 </ul>
@@ -89,6 +89,7 @@
                             <tr>
                             <th class="group-number" scope="col-1">#</th>
                             <th class="group-name" scope="col"> Наименование групп, отделов и т.д. </th> 
+                            <th class="edit-col" scope="col"></th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -98,6 +99,11 @@
                                     <th class="group-number" scope="row">{{loop.index}}</th>
                                     <td >
                                     <input name="{{subdivision.id}}" data-subdivision-id='{{subdivision.id}}' autocomplete="off" type="text" class="form-control edit-period" value="{{subdivision.name}}" aria-describedby="basic-addon1" required>
+                                    </td>
+                                    <td>
+                                      <a class="del-btn" type="button" data-subdivision-id="{{subdivision.id}}">            
+                                        <img src="{{ url_for('static', path='img/del.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Удалить">
+                                      </a>
                                     </td>
                                     <!-- <td class="group-name">экзамен на анимешника</td> -->
                                 </tr>
