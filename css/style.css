@@ -187,6 +187,6 @@ th, td {
   overflow: hidden;
 }
 
-.edit-col {
+.edit-col, .edit-column, .del-column, .exam-type-edit, .exam-type-del {
   width: 50px;
 }

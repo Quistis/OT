@@ -1,4 +1,6 @@
 import { createExamination } from './renderEmployeeList.js';
+import { createALertElement, createSuccesElement } from './alertFunctions.js';
+
 
 function addExam(evt) {
   
@@ -110,19 +112,31 @@ function editEmployee(evt) {
         body: JSON.stringify(object)
       },
     )
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.code == 1) {
-        console.log('pchel');
-        const footer = editEmployeeForm.querySelector('.modal-footer');
-        const errorText = `<span>${data.detail}</span>`
-        footer.insertAdjacentHTML("afterbegin", errorText);
-      }
-      else {
-        const closeButton = editEmployeeForm.querySelector(".close-button");
-        closeButton.click();
-      }
-      });
+    .then((response) => {
+
+      response.json()
+      .then((data) => {
+        if (response.status === 200) {
+          if (data.code == 1) {
+            console.log('pchel');
+            const footer = editEmployeeForm.querySelector('.modal-footer');
+            const errorText = `<span>${data.detail}</span>`
+            footer.insertAdjacentHTML("afterbegin", errorText);
+          }
+          else {
+            const closeButton = editEmployeeForm.querySelector(".close-button");
+            closeButton.click();
+          };
+        } else {
+          console.log('error');
+            const filterContainer = document.querySelector('.filter-container');
+            filterContainer.insertAdjacentHTML('afterbegin', createALertElement(data.detail));
+            
+        }
+        });
+    });
+    
+    
   } else {
     console.log(object);
     fetch(
@@ -186,7 +200,72 @@ function delExam(evt) {
     }
 
   });
+};
+
+function importFile(event) {
+  const form = event.currentTarget;
+  const importForm = document.querySelector('.import-form');
+  const url = new URL(importForm.action);
+  const formData = new FormData(form);
+  const fetchOptions = {
+    method: form.method,
+    body: formData,
+  };
+  fetch(url, fetchOptions)
+  .then((response) => {
+    response.json().then(data => {
+      const filterContainer = document.querySelector('.filter-container');
+      if (response.status === 200) {
+        filterContainer.insertAdjacentHTML('afterend', createSuccesElement());
+        console.log(response);
+        setTimeout(() => {
+          const element = document.querySelector('.succes-alert');
+          element.remove();
+        }, "3000");
+      }
+      else {
+        filterContainer.insertAdjacentHTML('afterend', createALertElement(data.detail));
+        // setTimeout(() => {
+        //   const element = document.querySelector('.error-alert');
+        //   element.remove();
+        // }, "10000");
+      };
+    })
+  });
+
+  event.preventDefault();
+};
+
+function delEmployee(evt) {
+  evt.preventDefault();
+  console.log('del');
+  // const addExamForm = document.querySelector('.add-exam-form');
+  // let exam_id = addExamForm.dataset.examId;
+  // let employee_id = addExamForm.dataset.employeeId;
+  // const closeButton = addExamForm.querySelector(".close-button");
+
+  // fetch(
+  //   `/exams/del?exam_id=${exam_id}`,
+  //   {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   },
+  // )
+  // .then( () => {
+  //   closeButton.click();
+  //   const examRow = document.querySelector(`.exam-id-${exam_id}`);
+  //   examRow.remove();
+
+  //   const collapse = document.getElementById(`${employee_id}`);
+  //   const tableBody = collapse.querySelector('tbody');
+  //   const rows = tableBody.querySelectorAll("tr");
+  //   for (let i=0; i <= rows.length; i++) {
+  //     rows[i].querySelector('.exam-number').textContent = i + 1;
+  //   }
+
+  // });
 }
 
-
-export {addExam, editEmployee, delExam};
+export {addExam, editEmployee, delExam, importFile, delEmployee};

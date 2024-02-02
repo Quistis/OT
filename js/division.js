@@ -1,3 +1,5 @@
+import { createALertElement } from './alertFunctions.js';
+
 const addButtons = document.querySelectorAll('.add-division__btn');
 const groupForms = document.querySelectorAll('.group-form');
 const saveButtons = document.querySelectorAll('.save-info__btn');
@@ -10,14 +12,13 @@ for (const btn of addButtons) {
         const collapse = document.querySelector(`#collapse-${btn.dataset.divisionId}`);
         const table = collapse.querySelector('tbody');
         const tableRowsLength = table.getElementsByTagName('td').length;
-        new_row_text = `<tr> <th class='group-number' scope='row'> ${tableRowsLength + 1} </th><td> <input name='0' autocomplete='off' type='text' class='form-control edit-period' value='' aria-describedby='basic-addon1' required></td></tr>`;
+        const new_row_text = `<tr> <th class='group-number' scope='row'> ${tableRowsLength + 1} </th><td> <input name='0' autocomplete='off' type='text' class='form-control edit-period' value='' aria-describedby='basic-addon1' required></td></tr>`;
         table.insertAdjacentHTML("beforeend", new_row_text);
     });
 }
 
 for (const btn of delButtons) {
   btn.addEventListener('click', () => {
-      console.log(btn.dataset.subdivisionId);
 
       fetch(
         `/subdivisions/del/${btn.dataset.subdivisionId}`,
@@ -28,13 +29,21 @@ for (const btn of delButtons) {
           }
         },
       )
-      .then((response) => 
-      {
-        console.log(response.status);
+      .then((response) => {
+
         response.json()
         .then((data) => {
-            console.log(data);
-        })
+          if (response.status === 400) {
+            const divisions_list = document.querySelector('.disivion-list');
+            divisions_list.insertAdjacentHTML('afterbegin', createALertElement(data.detail));
+          }
+          else {
+            const row = document.querySelector(`[data-subdivision-id="${btn.dataset.subdivisionId}"]`); 
+            row.parentElement.parentElement.remove();
+          }
+
+        });
+      
       });
   });
 };
@@ -47,8 +56,7 @@ for (const form of groupForms) {
 
         let object = {};
         formData.forEach((value, key) => object[key] = value);
-        inputdata = {division_id:divisionId, subdivisions: object}; 
-        console.log(inputdata);
+        let inputdata = {division_id:divisionId, subdivisions: object}; 
         fetch(
             `/subdivisions/update_subdivisions`,
             {
@@ -59,12 +67,18 @@ for (const form of groupForms) {
               body: JSON.stringify(inputdata)
             },
           )
-          .then((response) => response.json())
-          .then((data) => {
-             
-            })
-          .catch((err) => {
-            console.log(err);
+          .then((response) => {
+
+            response.json()
+            .then((data) => {
+              if (response.status === 400) {
+                const divisions_list = document.querySelector('.disivion-list');
+                divisions_list.insertAdjacentHTML('afterbegin', createALertElement(data.detail));
+              }
+
+            });
+          
           });
+          
     });
 };

@@ -32,7 +32,7 @@
                 <a class="nav-link" aria-current="page" href="/">Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/exams-list">Подробный список</a>
+                <a class="nav-link" href="/exams-list">Список экзаменов</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/certificates">Удостоверения</a>
@@ -171,7 +171,7 @@
     
     <script src="{{ url_for('static', path='js/bootstrap_js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', path='js/bootstrap_js/tooltip-enable') }}" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', path='js/division.js') }}"></script>
+    <script type="module" src="{{ url_for('static', path='js/division.js') }}"></script>
     
 </body>
 </html>

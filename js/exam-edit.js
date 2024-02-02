@@ -1,3 +1,5 @@
+import { createALertElement } from "./alertFunctions.js";
+
 const editForm = document.querySelector('.exam-type-form');
 const editName = editForm.querySelector('.edit-name');
 const editPeriod = editForm.querySelector('.edit-period');
@@ -5,6 +7,7 @@ const editDescription = editForm.querySelector('.edit-description');
 const addExamType = document.querySelector('.add-exam-type-btn');
 const editButtons = document.querySelectorAll('.edit-exam-type-btn')
 const closeButton = editForm.querySelector(".close-button");
+const delButtons = document.querySelectorAll('.del-exam-type-btn');
 
 for (const btn of editButtons) {
   btn.addEventListener('click', () => {
@@ -21,7 +24,39 @@ for (const btn of editButtons) {
     editDescription.value = examDescription;
 
   });
-}
+};
+
+for (const btn of delButtons) {
+  btn.addEventListener('click', () => {
+    console.log(btn.dataset.examId);
+    const examRow = document.querySelector(`#exam-id-${btn.dataset.examId}`);
+    const title = document.querySelector('.exam-type-title');
+    fetch(
+      `/exam_types/delete/${btn.dataset.examId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      },
+    )
+    .then((response) => {
+
+      response.json()
+      .then((data) => {
+        if (response.status === 400) {
+          title.insertAdjacentHTML('afterend', createALertElement(data.detail));
+        }
+        else {
+          examRow.remove();
+        }
+
+      });
+    
+    });
+
+  });
+};
 
 addExamType.addEventListener('click', () => {
 

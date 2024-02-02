@@ -32,7 +32,7 @@
                 <a class="nav-link" aria-current="page" href="/">Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Подробный список</a>
+                <a class="nav-link" href="/exams-list">Список экзаменов</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/certificates">Удостоверения</a>
@@ -63,7 +63,8 @@
               <tr>
                 <th class="position-num" scope="col">#</th>
                 <th class="position-name" scope="col">Наименование</th>
-                <th class="edit-column col-1" scope="col"></th>
+                <th class="edit-column" scope="col"></th>
+                <th class="del-column" scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -72,10 +73,15 @@
                         <th class="exam-num" scope="row">{{loop.index}}</th> 
                         <td class="position-name">{{ position.name }}</td>
                         <td> 
-                            <a class="edit-position-btn ms-4" type="button" data-position-id="{{position.id}}" data-bs-toggle="modal" data-bs-target="#position-edit">            
+                            <a class="edit-position-btn" type="button" data-position-id="{{position.id}}" data-bs-toggle="modal" data-bs-target="#position-edit">            
                                 <img src="{{ url_for('static', path='img/icon-edit.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать">
                             </a>
                         </td>
+                        <td> 
+                          <a class="del-position-btn" type="button" data-position-id="{{position.id}}">            
+                              <img src="{{ url_for('static', path='img/del.png') }}" width="32px" height="32px">
+                          </a>
+                      </td>
                     </tr>
                 {% endfor %}
             </tbody>

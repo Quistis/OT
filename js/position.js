@@ -1,8 +1,11 @@
+import { createALertElement } from './alertFunctions.js';
+
 const editForm = document.querySelector('.position-form');
 const editName = editForm.querySelector('.edit-name');
 const addPosition = document.querySelector('.add-position-btn');
 const editButtons = document.querySelectorAll('.edit-position-btn')
 const closeButton = editForm.querySelector(".close-button");
+const delButtons = document.querySelectorAll('.del-position-btn'); 
 
 for (const btn of editButtons) {
   btn.addEventListener('click', () => {
@@ -14,7 +17,40 @@ for (const btn of editButtons) {
 
     editName.value = positionName;
   });
-}
+};
+
+for (const btn of delButtons) {
+  btn.addEventListener('click', () => {
+    console.log(btn.dataset.positionId)
+    fetch(
+      `/position/delete/${btn.dataset.positionId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      },
+    )
+    .then((response) => {
+
+      response.json()
+      .then((data) => {
+        if (response.status === 400) {
+          const title = document.querySelector('.positions-title');
+          title.insertAdjacentHTML('afterend', createALertElement(data.detail));
+        }
+        else {
+          const row = document.querySelector(`#position-id-${btn.dataset.positionId}`); 
+          console.log(row);
+          row.remove();
+          console.log("succes");
+        }
+
+      });
+    
+    });
+  });
+};
 
 addPosition.addEventListener('click', () => {
   
