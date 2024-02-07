@@ -1,15 +1,18 @@
 import { createExamination } from './renderEmployeeList.js';
 import { createALertElement, createSuccesElement } from './alertFunctions.js';
 
+const addExamForm = document.querySelector('.add-exam-form');
+const closeButtonAdd = addExamForm.querySelector(".close-button");
+
+const editEmployeeForm = document.querySelector('.edit-employee-form');
+const closeButtonEdit = editEmployeeForm.querySelector(".close-button");
 
 function addExam(evt) {
   
   evt.preventDefault();
-  const addExamForm = document.querySelector('.add-exam-form');
   const formData = new FormData(evt.target);
   let employee_id = addExamForm.dataset.employeeId;
   let exam_id = addExamForm.dataset.examId;
-  const closeButton = addExamForm.querySelector(".close-button");
 
   let object = {};
   formData.forEach((value, key) => object[key] = value);
@@ -30,7 +33,7 @@ function addExam(evt) {
         const tableBody = collapse.querySelector('tbody');
 
         
-        closeButton.click();
+        closeButtonAdd.click();
         
         if (tableBody == null) {
           const examinationsTableTemplate = document.querySelector('#examinations-table')
@@ -64,7 +67,7 @@ function addExam(evt) {
     )
     .then((response) => response.json())
     .then((data) => {
-        closeButton.click();
+        closeButtonAdd.click();
 
         const examRow = document.querySelector(`.exam-id-${exam_id}`);
 
@@ -78,7 +81,7 @@ function addExam(evt) {
         exam.textContent = data.exam_type.name;
         protocol.textContent = data.protocol;
         date.textContent = data.date;
-        nextDate.textContent = data.nextDate;
+        nextDate.textContent = data.next_date;
         place.textContent = data.place;
         notation.textContent = data.notation;
       
@@ -91,7 +94,6 @@ function editEmployee(evt) {
   evt.preventDefault();
 
   const formData = new FormData(evt.target);
-  const editEmployeeForm = document.querySelector('.edit-employee-form');
   let employeeId = editEmployeeForm.dataset.employeeId;
 
   let object = {};
@@ -118,14 +120,12 @@ function editEmployee(evt) {
       .then((data) => {
         if (response.status === 200) {
           if (data.code == 1) {
-            console.log('pchel');
             const footer = editEmployeeForm.querySelector('.modal-footer');
             const errorText = `<span>${data.detail}</span>`
             footer.insertAdjacentHTML("afterbegin", errorText);
           }
           else {
-            const closeButton = editEmployeeForm.querySelector(".close-button");
-            closeButton.click();
+            closeButtonEdit.click();
           };
         } else {
           console.log('error');
@@ -149,10 +149,12 @@ function editEmployee(evt) {
         body: JSON.stringify(object)
       },
     )
-    .then((response) => response.json())
-    .then((data) => {
-        const closeButton = editEmployeeForm.querySelector(".close-button");
-        closeButton.click();
+    .then((response) => {
+      response.json()
+      .then((data) => {
+        if (response.status === 200) {
+        
+          closeButtonEdit.click();
         
         const collapse = document.getElementById(`${employeeId}`);
 
@@ -163,20 +165,44 @@ function editEmployee(evt) {
         const division = collapse.querySelector('.employee-division');
 
         fio.textContent = data.fio;
-        position.textContent = `Должность: ${data.position}`
-        subdivision.textContent = `Группа, отдел: ${data.subdivision}`
-        certificate.textContent = `Номер удостоверения: ${data.certificate}`
-        division.textContent =  `Подразделение: ${data.division}` 
-      });
-  }
+        position.textContent = `Должность: ${data.position}`;
+        subdivision.textContent = `Группа, отдел: ${data.subdivision}`;
+        certificate.textContent = `Номер удостоверения: ${data.certificate}`;
+        division.textContent =  `Подразделение: ${data.division}`;
 
-}
+        } else {
+          const filterContainer = editEmployeeForm.querySelector('.modal-footer');
+          filterContainer.insertAdjacentHTML('afterbegin', createALertElement(data.detail));  
+        };
+
+        });
+    });
+  }
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //       closeButtonEdit.click();
+        
+  //       const collapse = document.getElementById(`${employeeId}`);
+
+  //       const fio = document.querySelector(`#employee-name-${employeeId}`);
+  //       const position =  collapse.querySelector('.employee-position');
+  //       const subdivision = collapse.querySelector('.employee-subdivision');
+  //       const certificate = collapse.querySelector('.employee-certificate');
+  //       const division = collapse.querySelector('.employee-division');
+
+  //       fio.textContent = data.fio;
+  //       position.textContent = `Должность: ${data.position}`
+  //       subdivision.textContent = `Группа, отдел: ${data.subdivision}`
+  //       certificate.textContent = `Номер удостоверения: ${data.certificate}`
+  //       division.textContent =  `Подразделение: ${data.division}` 
+  //     });
+  // }
+
+};
 
 function delExam(evt) {
-  const addExamForm = document.querySelector('.add-exam-form');
   let exam_id = addExamForm.dataset.examId;
   let employee_id = addExamForm.dataset.employeeId;
-  const closeButton = addExamForm.querySelector(".close-button");
 
   fetch(
     `/exams/del?exam_id=${exam_id}`,
@@ -188,7 +214,7 @@ function delExam(evt) {
     },
   )
   .then( () => {
-    closeButton.click();
+    closeButtonAdd.click();
     const examRow = document.querySelector(`.exam-id-${exam_id}`);
     examRow.remove();
 
@@ -197,7 +223,7 @@ function delExam(evt) {
     const rows = tableBody.querySelectorAll("tr");
     for (let i=0; i <= rows.length; i++) {
       rows[i].querySelector('.exam-number').textContent = i + 1;
-    }
+    };
 
   });
 };
@@ -239,33 +265,24 @@ function importFile(event) {
 function delEmployee(evt) {
   evt.preventDefault();
   console.log('del');
-  // const addExamForm = document.querySelector('.add-exam-form');
-  // let exam_id = addExamForm.dataset.examId;
-  // let employee_id = addExamForm.dataset.employeeId;
-  // const closeButton = addExamForm.querySelector(".close-button");
+  const editEmployeeForm = document.querySelector('.edit-employee-form');
+  let employeeId = editEmployeeForm.dataset.employeeId;
 
-  // fetch(
-  //   `/exams/del?exam_id=${exam_id}`,
-  //   {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   },
-  // )
-  // .then( () => {
-  //   closeButton.click();
-  //   const examRow = document.querySelector(`.exam-id-${exam_id}`);
-  //   examRow.remove();
+  fetch(
+    `/employees/del/${employeeId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    },
+  )
+  .then( () => {
+    closeButtonEdit.click();
+    const collapse = document.getElementById(`${employeeId}`);
+    collapse.parentElement.remove();
 
-  //   const collapse = document.getElementById(`${employee_id}`);
-  //   const tableBody = collapse.querySelector('tbody');
-  //   const rows = tableBody.querySelectorAll("tr");
-  //   for (let i=0; i <= rows.length; i++) {
-  //     rows[i].querySelector('.exam-number').textContent = i + 1;
-  //   }
+  });
+};
 
-  // });
-}
-
-export {addExam, editEmployee, delExam, importFile, delEmployee};
+export { addExam, editEmployee, delExam, importFile, delEmployee };

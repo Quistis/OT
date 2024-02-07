@@ -160,6 +160,17 @@ const createEmployeeCard = (employee) => {
     const addExamForm = document.querySelector('.add-exam-form');
     addExamForm.dataset.employeeId = addButton.dataset.employeeId;
     addExamForm.dataset.examId = 0;
+    
+    const protocol = addExamForm.querySelector('.protocol-input');
+    const date = addExamForm.querySelector('.date-input');
+    const next_date = addExamForm.querySelector('.next-date-input');
+    const text_area = addExamForm.querySelector('.text-input'); 
+
+
+    protocol.value = null;
+    date.value = null;
+    next_date.value = null;
+    text_area.value = null;
   
   });
 
