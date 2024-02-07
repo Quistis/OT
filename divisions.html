@@ -61,11 +61,11 @@
         <ul class="disivion-list d-flex flex-column justify-content-between align-items-start flex-wrap">
             {% for division in divisions %}
                 
-                <li class="disivion-list__card disivion-card card mb-3">
+              <li class="disivion-list__card disivion-card card mb-3">
                 <form class="group-form" id="division-id-{{division.id}}">
                 <div class="disivion-card__header card-header d-flex justify-content-start align-items-center">
                 
-                <h5 class="card-header__name text-center d-block">{{division.name}}</h5>
+                <h5 id="title-{{division.id}}" class="card-header__name text-center d-block">{{division.name}}</h5>
 
                 <a class="arrow-down" data-bs-toggle="collapse" href="#collapse-{{division.id}}" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 
@@ -75,11 +75,17 @@
                     <img src="/static/img/icon-plus.svg" width="28px" height="28px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить группу">
                 </a>
 
-                <button class="save-info__btn" type="submit">
+                <button class="save-info__btn me-2" type="submit">
                     <!-- <img src="./img/icon-edit.png" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать сотрудника"> -->
 
                     <img src="/static/img/icon-save.png" width="25px" height="25px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Сохранить">
                 </button>
+
+                <a class="edit-division__btn" data-division-id="{{division.id}}" type="button" data-bs-toggle="modal" data-bs-target="#division-edit">
+                  <!-- <img src="./img/icon-edit.png" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать сотрудника"> -->
+      
+                  <img src="{{ url_for('static', path='img/icon-edit.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Редактировать сотрудника">
+                </a>
 
                 </div>
                 <div class="collapse" id="collapse-{{division.id}}">
@@ -105,27 +111,30 @@
                                         <img src="{{ url_for('static', path='img/del.png') }}" width="32px" height="32px" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Удалить">
                                       </a>
                                     </td>
-                                    <!-- <td class="group-name">экзамен на анимешника</td> -->
                                 </tr>
                             {% endfor %}
             
                         </tbody>
                     </table>
                 </div>
-                </li>
-            </form>
+              </form>
+            </li>
+           
             {% endfor %}
+            <button class="btn btn-primary add-division-btn" type="button" data-bs-toggle="modal" data-bs-target="#division-edit">Добавить подразделение</button>
+
         </ul>
+
     </div>
       
     
 
     <!-- Modal -->
 
-    <!-- <div class="modal fade" id="exam-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="division-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         
-        <form class="exam-type-form" data-exam-id="">
+        <form class="division-form" data-division-id="0">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">Редактировать</h1>
@@ -135,38 +144,20 @@
 
               <div class="input-group mb-3">
                 <label class="input-group-text text-center d-block" style="width:150px">Наименование</label>
-                <input name="name" type="text" class="form-control edit-name" id="validationServer01" value="" required>
-                <div class="invalid-feedback">
-                  Пожалуйста, введите сообщение в текстовое поле.
-                </div>
-              </div>
-
-              <div class="input-group mb-3">
-                <span class="input-group-text text-center d-block" style="width:150px" id="basic-addon1">Период</span>
-                <input name="period" type="number" class="form-control edit-period" value="" aria-describedby="basic-addon1" required>
-                <div class="invalid-feedback">
-                  Пожалуйста, введите сообщение в текстовое поле.
-                </div>
-              </div>
-
-              <div class="input-group mb-3">
-                <label class="input-group-text text-center d-block" style="width:150px">Описание</label>
-                <textarea class="form-control edit-description" id="validationTextarea" name="description" rows="5" cols="50">chel ty chort</textarea>
-                <div class="invalid-feedback">
-                  Пожалуйста, введите сообщение в текстовое поле.
-                </div>
+                <input name="name" type="text" autocomplete="off" class="form-control edit-name division-name" value="" required>
               </div>
             
               </div>
-              <div class="modal-footer">
-              <button type="button" class="btn btn-secondary close-button" data-bs-dismiss="modal">Закрыть</button>
+            <div class="modal-footer">
+              <button class="btn btn-danger del-employee-button">Удалить</button>
+              <button type="button" class="btn btn-secondary division-close close-button" data-bs-dismiss="modal">Закрыть</button>
               <button type="submit" class="btn btn-primary">Принять</button>
             </div>
           
           </div>
         </form>
       </div>
-    </div> -->
+    </div>
 
     
     <script src="{{ url_for('static', path='js/bootstrap_js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>

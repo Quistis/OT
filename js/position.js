@@ -41,9 +41,7 @@ for (const btn of delButtons) {
         }
         else {
           const row = document.querySelector(`#position-id-${btn.dataset.positionId}`); 
-          console.log(row);
           row.remove();
-          console.log("succes");
         }
 
       });
