@@ -9,6 +9,8 @@ const divisionInput = document.querySelector('.division-name');
 const divisionForm = document.querySelector('.division-form');
 const divisionFormClose = document.querySelector('.division-close');
 const addDivisionBtn = document.querySelector('.add-division-btn');
+const delDivisionBtn = document.querySelector('.del-division-button');
+const footer = document.querySelector('.modal-footer');
 
 
 for (const btn of addButtons) {
@@ -153,7 +155,6 @@ divisionForm.addEventListener('submit', (evt) => {
         response.json()
         .then((data) => {
           if (response.status === 400) {
-            const footer = document.querySelector('.modal-footer');
             footer.insertAdjacentHTML('afterbegin', createALertElement(data.detail));
           }
           else {
@@ -171,6 +172,37 @@ divisionForm.addEventListener('submit', (evt) => {
 
 addDivisionBtn.addEventListener('click', () => {
   divisionForm.dataset.divisionId = '0';
+});
+
+delDivisionBtn.addEventListener('click', () => {
+  const divisionId = divisionForm.dataset.divisionId;
+
+  fetch(
+    `/divisions/delete/${divisionId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }     
+    },
+  )
+  .then((response) => {
+
+    response.json()
+    .then((data) => {
+      if (response.status === 400) {
+        footer.insertAdjacentHTML('afterbegin', createALertElement(data.detail));
+      }
+      else {
+        divisionFormClose.click();
+        const title = document.getElementById(`title-${divisionId}`);
+        console.log(title.parentElement.parentElement.parentElement)
+        title.parentElement.parentElement.parentElement.remove();
+      };
+
+    });
+  
+  });
 });
 
 function createDivisionElemet(divisionId, divisionName) {
