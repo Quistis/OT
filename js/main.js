@@ -30,3 +30,31 @@ importForm.addEventListener('submit', importFile);
 
 const delEmployeeButton = document.querySelector('.del-employee-button');
 delEmployeeButton.addEventListener('click', delEmployee);
+
+const serchLine = document.querySelector('.search-line');
+serchLine.addEventListener('submit', searchEmployee)
+
+const onDataSuccess = (data) => {
+  const employeeList = document.querySelector('.employee-list');
+  employeeList.innerHTML = '';
+
+  renderEmployees(data);
+};
+
+const sendRequest = (onSuccess, url) => {
+  fetch(url)
+    .then((responce) => responce.json())
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+function searchEmployee(evt) {
+  evt.preventDefault();
+  const query = document.querySelector('.search-input').value;
+  const url = `/employees/get_all_with_exams?query=${query}`;
+  sendRequest(onDataSuccess, url);
+};

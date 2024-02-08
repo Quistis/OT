@@ -138,7 +138,6 @@ function editEmployee(evt) {
     
     
   } else {
-    console.log(object);
     fetch(
       `/employees/update/${employeeId}/`,
       {
@@ -178,25 +177,6 @@ function editEmployee(evt) {
         });
     });
   }
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //       closeButtonEdit.click();
-        
-  //       const collapse = document.getElementById(`${employeeId}`);
-
-  //       const fio = document.querySelector(`#employee-name-${employeeId}`);
-  //       const position =  collapse.querySelector('.employee-position');
-  //       const subdivision = collapse.querySelector('.employee-subdivision');
-  //       const certificate = collapse.querySelector('.employee-certificate');
-  //       const division = collapse.querySelector('.employee-division');
-
-  //       fio.textContent = data.fio;
-  //       position.textContent = `Должность: ${data.position}`
-  //       subdivision.textContent = `Группа, отдел: ${data.subdivision}`
-  //       certificate.textContent = `Номер удостоверения: ${data.certificate}`
-  //       division.textContent =  `Подразделение: ${data.division}` 
-  //     });
-  // }
 
 };
 
@@ -264,7 +244,6 @@ function importFile(event) {
 
 function delEmployee(evt) {
   evt.preventDefault();
-  console.log('del');
   const editEmployeeForm = document.querySelector('.edit-employee-form');
   let employeeId = editEmployeeForm.dataset.employeeId;
 
