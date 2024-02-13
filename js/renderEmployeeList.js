@@ -174,6 +174,17 @@ const createEmployeeCard = (employee) => {
   
   });
 
+  const cardHeader = employeeCard.querySelector('.employee-card__header');
+  const collapseBtn = employeeCard.querySelector('.arrow-down');
+
+  cardHeader.addEventListener('click', (evt) => {
+
+    if (evt.target.tagName == 'DIV') {
+      collapseBtn.click();
+    };    
+    
+  });
+
   let editButton = employeeCard.querySelector('.edit-employee-info__btn');
 
   editButton.setAttribute('data-employee-id', employee.id);

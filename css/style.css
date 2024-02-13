@@ -3,6 +3,7 @@ body {
   background-image: url('/static/img/bg-1.jpg');
   background-size: cover;
   background-repeat: repeat;
+  font-size: 18px;
 }
 
 .container, .container-fluid {
@@ -80,8 +81,8 @@ th, td {
   border-width: 0 2px 2px 0;
 
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   padding: 5px;
   margin: -7px auto 0 10px;
 

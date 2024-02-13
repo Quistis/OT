@@ -1,5 +1,5 @@
 const Urls = {
-  employeeData: '/employees/get_all_with_exams/',
+  employeeData: '/employees/get_all_with_exams',
   navPillsData: '/divisions/'
 };
 

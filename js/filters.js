@@ -56,6 +56,7 @@ const onDataSuccess = (data) => {
   employeeList.innerHTML = '';
 
   renderEmployees(data);
+  
 };
 
 const sendRequest = (onSuccess, url) => {
@@ -80,14 +81,58 @@ const onFiltersListClick = (evt) => {
 
     if (targetId === 'everyone') {
       getEmployeesData(onDataSuccess);
-
+      filterSubdisionList(null);
       return;
     }
 
     const url = `/employees/get_all_with_exams?division=${targetId}`;
 
     sendRequest(onDataSuccess, url);
+
+    filterSubdisionList(targetId);
+
   }
 };
 
 filtersList.addEventListener('click', onFiltersListClick);
+
+function filterSubdisionList(divisionId) {
+  const subdivisionList = document.querySelector('.subdivision-input');
+  
+  fetch(
+    `/subdivisions/${divisionId !== null ? '?division_id=' + divisionId : ''}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    },
+  )
+  .then((response) => {
+    let check = true;
+    response.json()
+    .then((data) => {
+      if (response.status === 200) {
+        for (let sub of subdivisionList.options){
+          check = true;
+          for (const new_sub of data){
+            if (parseInt(sub.value, 10) === parseInt(new_sub.id, 10)) {
+              check = false;
+              break;
+            }
+          };
+          if (check) {
+            sub.hidden = true;
+          }
+          else {
+            sub.hidden = false;
+          }
+          
+        };
+      } else {
+        const filterContainer = document.querySelector('.filter-container');
+        filterContainer.insertAdjacentHTML('afterbegin', createALertElement(data.detail));        
+      };
+    });
+  });
+};
